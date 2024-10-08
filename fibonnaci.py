@@ -23,16 +23,23 @@ def fib(limit):
     
     while F1 < limit: 
         numbers.append(F1) 
-        next_number = F1 + F2 #stores the next fib number 
-        F1 = F2 #after appending F1, now its updated to the current F2
-        F2 = next_number #and F2 is now updated after being calculated
+        next_number = F1 + F2  # Stores the next Fibonacci number 
+        F1 = F2  # Update F1 to the current F2
+        F2 = next_number  # Update F2 after being calculated
     return numbers
 
 if __name__ == "__main__":
-	parser = argparse.ArgumentParser()
-	parser.add_argument("limit", help="Upper Limit")
-    parser.add_argument("name", help="Output File Name")
-	parser.add_argument("-c", "--count", type=int, default=1)
-	
-	args = parser.parse_args()
-	
+    parser = argparse.ArgumentParser()
+    parser.add_argument("limit", type=int, help="Upper Limit for Fibonacci numbers")
+    parser.add_argument("filename", help="Output File Name")
+    
+    args = parser.parse_args()
+
+    with open(args.filename, 'w') as f:
+        f.write(f"Fibonacci numbers less than {args.limit}:\n")
+        for number in fib(args.limit):
+            f.write(f"{number}\n")  # Write each number followed by a newline
+
+    print(f"Fibonacci numbers less than {args.limit} have been written to {args.filename}.")
+        
+      
